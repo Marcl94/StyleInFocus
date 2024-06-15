@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="infos.css"> <!-- Verifique o caminho do seu arquivo CSS -->
+    <link rel="shortcut icon" href="img/logopreta.png" type="image">
+    <title>Atualizar e Excluir Conta</title>
+</head>
+<body>
+  <!-- BACKGROUND -->
+  <div class="area">
+    <ul class="circles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+
+    <!-- FORMS -->
+    <div class="header">
+      <div class="inner-header flex">
+        <div class="login-container2" style="margin-top: 110px;">
+          <a href="index.html"><img src="img/logopreta.png" class="ImgLogin2" style="width: 220px; height: 200px; margin-bottom: 40px; margin-left: 25px; margin-top: -50px;"></a>
+          <p class="bemvindo">BEM-VINDO(A)</p>
+          <p class="bemvindo2">Atualize sua conta!</p>
+
+          <!-- Formulário de Atualização de Senha -->
+          <form id="updateForm" action="update_delete.php" method="post" class="update-form">
+            <div class="form-group">
+              <input class="input-login" name="username" type="text" placeholder="Digite seu usuário:" required>
+            </div>
+            <div class="form-group">
+              <input class="input-login" name="new_password" type="password" placeholder="Digite sua nova senha:" required>
+            </div>
+            <button type="submit" name="update" class="glow-on-hover">Atualizar Senha</button>
+          </form>
+          <br>
+          <br>
+
+          <!-- Formulário de Exclusão de Conta -->
+          <form id="deleteForm" action="update_delete.php" method="post" onsubmit="return confirm('Tem certeza que deseja excluir sua conta?');" class="delete-form">
+            <button type="submit" name="delete" class="glow-on-hover-delete-btn">Excluir Conta</button>
+          </form>
+
+    
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

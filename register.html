@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="register.css">
+  <link rel="shortcut icon" href="img/logopreta.png" type="image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Freeman&display=swap" rel="stylesheet">
+  
+  <title>Cadastro</title>
+  
+</head>
+
+<body>
+  <!-- BACKGROUND -->
+  <div class="area">
+    <ul class="circles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+
+    <!-- FORMS -->
+    <div class="header">
+      <div class="inner-header flex">
+        <div class="login-container2" style="margin-top: 110px;">
+          <a href="index.html"><img src="img/logopreta.png" class="ImgLogin2" style="width: 190px; height: 200px; margin-bottom:30px;  margin-left: 25px; margin-top: -50px;"></a>
+          <p class="bemvindo">BEM-VINDO(A)</p>
+          <p class="bemvindo2">Crie sua conta!</p>
+
+          <div id="general-error" class="error-messages"></div> <!-- Div para mensagens de erro gerais -->
+
+          <form id="register-form" action="inserir.php" method="post">
+            <div>
+              <div id="username-error" style="color: #ff0000; font-size: 12px; font-family: Freeman, sans-serif;"></div>
+              <input class="input-login" name="username" type="text" placeholder="Digite seu usuário:">
+            </div>
+
+            <div>
+              <div id="email-error" style="color: #ff0000; font-size: 12px; font-family: Freeman, sans-serif;"></div>
+              <input class="input-login" name="email" type="email" placeholder="Digite seu email:">
+            </div>
+
+            <div>
+              <div id="password-error" style="color: #ff0000; font-size: 12px; font-family: Freeman, sans-serif;"></div>
+              <input class="input-login" name="password" type="password" placeholder="Digite sua senha:">
+            </div>
+
+            <button type="submit" class="glow-on-hover">CADASTRAR</button>
+            <p class="signup-link">
+              Já tem uma conta?
+              <a href="login.html">Logar</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('register-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Impede o envio padrão do formulário
+
+      var form = event.target;
+      var formData = new FormData(form);
+
+      fetch('inserir.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Limpa mensagens de erro anteriores
+        document.getElementById('username-error').textContent = '';
+        document.getElementById('email-error').textContent = '';
+        document.getElementById('password-error').textContent = '';
+        document.getElementById('general-error').textContent = '';
+
+        if (data.success) {
+          window.location.href = 'userCadastrado.html'; // Redireciona em caso de sucesso
+        } else {
+          if (data.errors.username) {
+            document.getElementById('username-error').textContent = data.errors.username;
+          }
+          if (data.errors.email) {
+            document.getElementById('email-error').textContent = data.errors.email;
+          }
+          if (data.errors.password) {
+            document.getElementById('password-error').textContent = data.errors.password;
+          }
+          if (data.errors.general) {
+            document.getElementById('general-error').textContent = data.errors.general;
+          }
+        }
+      })
+      .catch(error => console.error('Erro:', error));
+    });
+  </script>
+</body>
+
+</html>
